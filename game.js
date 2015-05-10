@@ -69,10 +69,10 @@ function create() {
     coins.callAll('animations.play', 'animations', 'spin');
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
-    platforms = game.add.group();
+    //platforms = game.add.group();
 
     //  We will enable physics for any object that is created in this group
-    platforms.enableBody = true;
+    //platforms.enableBody = true;
 
     // Here we create the ground.
     //var ground = platforms.create(0, game.world.height - 64, 'ground');
@@ -105,7 +105,7 @@ function create() {
 		this.monster.healthText = game.add.text((this.monster.x)+7,(this.monster.y)-15, '20',{ fontSize: '16px', fill: 'white'});
 		//this.healthText.destroy();
 		this.monster.body.setSize(25, 44, 3, 4);
-		game.physics.arcade.collide(this.monster, layer);
+		//game.physics.arcade.collide(this.monster, layer);
 		this.health = 20;
 		this.monster.animations.add('left', [0, 1, 2, 3], 10, true);
 		this.monster.animations.add('right', [5, 6, 7, 8], 10, true);
@@ -250,7 +250,7 @@ function playerStepOnMonster(player, monster) {
 function walk(){
 		var d = new Date();
 		var n = d.getSeconds()%10;
-console.log(n);
+//console.log(n);
 for(var i=0;i<monsters.length;i++){	
 		var kierunek = Math.round(Math.random()*2)
 		if(n+kierunek>8){
