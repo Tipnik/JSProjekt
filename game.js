@@ -235,6 +235,7 @@ function playerStepOnMonster(player, monster) {
 	//console.log(monster);
 	//console.log(random._text);
 	monster.healthText.destroy();
+	player.y=player.y-20;
     monster.kill();
 	
 
