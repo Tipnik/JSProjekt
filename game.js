@@ -96,19 +96,18 @@ function create() {
 	//monster = game.add.sprite(128, game.world.height - 150, 'monster');
 	function createMonster(x, name){
 	    game.load.spritesheet('monster', 'assets/dude.png', 32, 48);
-	this.monster = game.add.sprite(x, game.world.height - 150, 'monster');
-	game.physics.arcade.enable(this.monster);
-	this.monster.body.bounce.y = 0.2;
-    this.monster.body.gravity.y = 150;
-    this.monster.body.collideWorldBounds = true;
-	this.healthText = game.add.text((this.monster.x)+7,(this.monster.y)-15, '20',{ fontSize: '16px', fill: 'white'});
-    this.monster.body.setSize(25, 44, 3, 4);
-	game.physics.arcade.collide(this.monster, layer);
-	this.health = 20;
-	this.nearWall = false;
-	this.monster.animations.add('left', [0, 1, 2, 3], 10, true);
-    this.monster.animations.add('right', [5, 6, 7, 8], 10, true);
-}
+		this.monster = game.add.sprite(x, game.world.height - 150, 'monster');
+		game.physics.arcade.enable(this.monster);
+		this.monster.body.bounce.y = 0.2;
+		this.monster.body.gravity.y = 150;
+		this.monster.body.collideWorldBounds = true;
+		this.healthText = game.add.text((this.monster.x)+7,(this.monster.y)-15, '20',{ fontSize: '16px', fill: 'white'});
+		this.monster.body.setSize(25, 44, 3, 4);
+		game.physics.arcade.collide(this.monster, layer);
+		this.health = 20;
+		this.monster.animations.add('left', [0, 1, 2, 3], 10, true);
+		this.monster.animations.add('right', [5, 6, 7, 8], 10, true);
+	}
 // Tworze 3 potworki
 monsters.push(new createMonster(100, 'monster1'));
 monsters.push(new createMonster(150, 'monster2'));
@@ -149,25 +148,23 @@ monsters.push(new createMonster(200, 'monster3'));
 function update() {
 
 	//game.physics.arcade.collide(player, platforms);
-	var kierunek = Math.round(Math.random()*100)
-	if(monsters[0].monster.x < game.world.centerX && monsters[0].nearWall == false ){
-	 monsters[0].monster.body.velocity.x = 150;
-    monsters[0].monster.animations.play('right');
-	}
-	else{
-		 monsters[0].monster.body.velocity.x = -150;
-    monsters[0].monster.animations.play('left');
-	}
 	game.physics.arcade.collide(player, layer);
-	monsters[0].healthText.x=(monsters[0].monster.x)+7;
-		monsters[0].healthText.y=(monsters[0].monster.y)-15;
-			monsters[1].healthText.x=(monsters[1].monster.x)+7;
-		monsters[1].healthText.y=(monsters[1].monster.y)-15;
-			monsters[2].healthText.x=(monsters[2].monster.x)+7;
-		monsters[2].healthText.y=(monsters[2].monster.y)-15;
 	for (var i=0;i<=monsters.length;i++){
-		game.physics.arcade.collide(monsters[0].monster, layer); // jak daje i zamiast 0 to nie dziala WTF
-		game.physics.arcade.overlap(player, monsters[0].monster, playerStepOnMonster, null, null);
+		game.physics.arcade.collide(monsters[i].monster, layer); // jak daje i zamiast 0 to nie dziala WTF
+		game.physics.arcade.overlap(player, monsters[i].monster, playerStepOnMonster, null, null);
+		monsters[i].healthText.x=(monsters[i].monster.x)+7;
+		monsters[i].healthText.y=(monsters[i].monster.y)-15;
+	}
+	for(var j=0;j<=monsters.length;j++){
+		var kierunek = Math.round(Math.random()*100)
+		if(monsters[i].monster.x < game.world.centerX){
+			monsters[i].monster.body.velocity.x = 150;
+			monsters[i].monster.animations.play('right');
+		}
+	else{
+		 monsters[i].monster.body.velocity.x = -150;
+		 monsters[i].monster.animations.play('left');
+		}
 	}
 
 	game.physics.arcade.overlap(player, coins, collectCoin, null, this);
