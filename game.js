@@ -246,7 +246,7 @@ function playerStepOnMonster(player, monster) {
 }
 
 }
-
+/*
 function walk(){
 		var d = new Date();
 		var n = d.getSeconds()%10;
@@ -267,3 +267,4 @@ for(var i=0;i<monsters.length;i++){
 	}
 }
 	walk();
+*/
