@@ -292,6 +292,7 @@ function walk() {
 			}
 	}
 }
+<<<<<<< HEAD
 
 function fire() {
 
@@ -309,3 +310,27 @@ function fire() {
 }
 
 walk();
+=======
+/*
+function walk(){
+		var d = new Date();
+		var n = d.getSeconds()%10;
+//console.log(n);
+for(var i=0;i<monsters.length;i++){	
+		var kierunek = Math.round(Math.random()*2)
+		if(n+kierunek>8){
+			monsters[i].monster.body.velocity.x = 150;
+			monsters[i].monster.animations.play('right');
+					if(((n+kierunek)%4)==0){
+			monsters[i].monster.body.velocity.y = -150;
+		}
+		}
+		else if(n+kierunek<8){
+			monsters[i].monster.body.velocity.x = -150;
+			monsters[i].monster.animations.play('left');
+		}
+	}
+}
+	walk();
+*/
+>>>>>>> origin/master
