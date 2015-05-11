@@ -192,6 +192,7 @@ function update() {
 	for (var i = 0; i < monsters.length; i++) {
 		game.physics.arcade.collide(monsters[i].monster, layer);
 		game.physics.arcade.overlap(player, monsters[i].monster, playerStepOnMonster);
+			game.physics.arcade.collide(bullets, monsters[i].monster, bulletOnMonster);
 		monsters[i].monster.healthText.x = (monsters[i].monster.x) + 7;
 		monsters[i].monster.healthText.y = (monsters[i].monster.y) - 15;
 	}
@@ -201,7 +202,7 @@ function update() {
 		}
 	}
 	
-	game.physics.arcade.collide(bullets, monsters, bulletOnMonster);
+
 	
 	game.physics.arcade.collide(bullets, layer, bulletOnWall);
 
@@ -301,9 +302,11 @@ if (cursors.left.isDown)
 	 
 	 function bulletOnMonster(bullet, monster)
 	 {
+		 bullet.kill();
+		 bullet.healthText.destroy();
 		 monster.kill();
-		 
 		 score += 5;
+		 		scoreText.text = 'Score: ' + score;
 	 }
 	
 	if (game.input.activePointer.isDown)
@@ -343,6 +346,9 @@ function fire() {
         bullet.reset(player.x, player.y);
 
         game.physics.arcade.moveToPointer(bullet, 300);
+				health -= 10;
+		healthText.text = 'Health: ' + health;
+
     }
 
 }
