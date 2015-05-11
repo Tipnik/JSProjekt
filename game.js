@@ -124,7 +124,7 @@ function create() {
 		this.monster = game.add.sprite(x, game.world.height - 150, 'monster');
 		game.physics.arcade.enable(this.monster);
 		this.monster.body.bounce.y = 0.2;
-		this.monster.body.gravity.y = 150;
+		this.monster.body.gravity.y = 450;
 		this.monster.body.collideWorldBounds = true;
 		this.monster.healthText = game.add.text((this.monster.x) + 7, (this.monster.y) - 15, '20', {
 				fontSize : '16px',
@@ -216,7 +216,6 @@ function update() {
 	monsters[i].monster.animations.play('left');
 	}
 	}*/
-	walk();
 	game.physics.arcade.overlap(player, coins, collectCoin, null, this);
 	//game.physics.arcade.overlap(player, monster, playerStepOnMonster, null, this);
 	game.debug.body(player);
@@ -224,30 +223,54 @@ function update() {
 	//  Reset the players velocity (movement)
 	player.body.velocity.x = 0;
 
-	if (cursors.left.isDown) {
-		//  Move to the left
-		player.body.velocity.x = -150;
+if (cursors.left.isDown)
+    {
+        //  Move to the left
+        player.body.velocity.x = -150;
 
-		player.animations.play('left');
-	} else if (cursors.right.isDown) {
-		//  Move to the right
-		player.body.velocity.x = 150;
+        player.animations.play('left');
+		for(var i=0;i<monsters.length;i++){
+		        monsters[i].monster.body.velocity.x = 150;
 
-		player.animations.play('right');
-	} else {
-		//  Stand still
-		player.animations.stop();
+       monsters[i].monster.animations.play('right');
+		}
+    }
+    else if (cursors.right.isDown)
+    {
+        //  Move to the right
+        player.body.velocity.x = 150;
 
-		player.frame = 4;
-	}
+        player.animations.play('right');
+				for(var i=0;i<monsters.length;i++){
+		        monsters[i].monster.body.velocity.x = -150;
 
-	//  Allow the player to jump if they are touching the ground.
+       monsters[i].monster.animations.play('left');
+		}
+    }
+    else
+    {
+        //  Stand still
+        player.animations.stop();
 
+        player.frame = 4;
+				for(var i=0;i<monsters.length;i++){
+		        monsters[i].monster.animations.stop();
+				monsters[i].monster.body.velocity.x = 0;
+         monsters[i].monster.frame = 4;
+		}
+    }
+
+    //  Allow the player to jump if they are touching the ground.
+    
 	if ((cursors.up.isDown || jumpButton.isDown) && player.body.onFloor())
-		// if ((cursors.up.isDown || jumpButton.isDown) && player.body.touching.down)
-	{
-		player.body.velocity.y = -350;
-	}
+    // if ((cursors.up.isDown || jumpButton.isDown) && player.body.touching.down)
+    {
+        player.body.velocity.y = -350;
+						for(var i=0;i<monsters.length;i++){
+		        monsters[i].monster.body.velocity.y = -350;
+
+		}
+    }
 
 	function collectCoin(player, coin) {
 
@@ -324,7 +347,6 @@ function fire() {
 
 }
 
-walk();
 /*
 function walk(){
 		var d = new Date();
