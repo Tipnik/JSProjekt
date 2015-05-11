@@ -31,6 +31,7 @@ var coins;
 var score = 0;
 var scoreText;
 var monsters = [];
+var monsters2;
 var step;
 
 var layer;
@@ -112,6 +113,11 @@ function create() {
 
 	// The player and its settings
 	player = game.add.sprite(32, game.world.height - 150, 'dude');
+	
+	
+	monsters2 = game.add.group();
+	monsters2.enableBody = true;
+	
 	//monster = game.add.sprite(128, game.world.height - 150, 'monster');
 	function createMonster(x, name) {
 		game.load.spritesheet('monster', 'assets/dude.png', 32, 48);
@@ -138,6 +144,7 @@ function create() {
 	monsters.push(new createMonster(350, 'monster4'));
 	monsters.push(new createMonster(450, 'monster4'));
 	monsters.push(new createMonster(550, 'monster4'));
+	
 	function monsterWalk() {
 		monsters[0].monster.body.velocity.x = 150;
 		monsters[0].monster.animations.play('right');
@@ -193,6 +200,8 @@ function update() {
 			game.physics.arcade.collide(monsters[j].monster, monsters[k].monster); // jak daje i zamiast 0 to nie dziala WTF
 		}
 	}
+	
+	game.physics.arcade.collide(bullets, monsters, bulletOnMonster);
 	
 	game.physics.arcade.collide(bullets, layer, bulletOnWall);
 
@@ -266,6 +275,13 @@ function update() {
 	 {
 		 bullet.kill();
 	 }
+	 
+	 function bulletOnMonster(bullet, monster)
+	 {
+		 monster.kill();
+		 
+		 score += 5;
+	 }
 	
 	if (game.input.activePointer.isDown)
     {
@@ -292,7 +308,6 @@ function walk() {
 			}
 	}
 }
-<<<<<<< HEAD
 
 function fire() {
 
@@ -310,7 +325,6 @@ function fire() {
 }
 
 walk();
-=======
 /*
 function walk(){
 		var d = new Date();
@@ -333,4 +347,3 @@ for(var i=0;i<monsters.length;i++){
 }
 	walk();
 */
->>>>>>> origin/master
